@@ -28,7 +28,7 @@ def totalSentMails(address):
 
 def sendMail(receiver,sender, title, content):
     now = datetime.now()
-    timeStamp = now.strftime("%H:%M - %m/%d/%Y")
+    timeStamp = now.strftime("%H:%M    %d-%m-%Y")
     web3.eth.default_account = sender
 
     try:

@@ -14,6 +14,10 @@
         document.getElementById("accDetail").classList.toggle("displayAccount");
     }
 
+    function displayMail(){
+        //Code Later
+    }
+
     function displayMenu(){
         //Code Later
     }
@@ -114,7 +118,9 @@
                         </form>
                     </div>
                 {% elif page == 2 %}
-                    <label class="Dmail">Inbox</label><br>
+                    <label class="boxText">Inbox</label><br>
+
+                    <div class="messageTable">
                     <table>
                         <tr>
                             <th> Sender </th>
@@ -125,33 +131,37 @@
 
                         {% for msg in msgs %}
                         <tr>
-                            <td> {{ msg[3] }}</td>
-                            <td> {{ msg[0] }}</td>
+                            <td> {{ accounts[defaultAccount][0] }}</td>
                             <td> {{ msg[1] }}</td>
                             <td> {{ msg[2] }}</td>
+                            <td> {{ msg[0] }}</td>
                         </tr>
                 {% endfor %}
-            </table>
+            </table></div>
 
                 {% else %}
-                    <label class="Dmail">Outbox</label><br>
+                    <label class="boxText">Outbox</label><br>
+                    <div class="messageTable">
                     <table>
-                        <tr>
+                        <tr onclick="">
                             <th> Sender </th>
                             <th> Title </th>
                             <th> Message </th>
+                            <th> </th>
                             <th> Time </th>
                         </tr>
 
                         {% for msg in msgs %}
                         <tr>
-                            <td> {{ msg[3] }}</td>
-                            <td> {{ msg[0] }}</td>
-                            <td> {{ msg[1] }}</td>
-                            <td> {{ msg[2] }}</td>
+                            <td> {{ accounts[defaultAccount][0] }}</td>
+                            <td > {{ msg[1] }}</td>
+                            <td > {{ msg[2] }}</td>
+                            <td></td>
+                            <td > {{ msg[0] }}</td>
                         </tr>
                 {% endfor %}
             </table>
+                    </div>
                 {% endif %}
 
 

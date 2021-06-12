@@ -5,17 +5,22 @@ app = Flask(__name__)
 
 
 _defaultAccount = _Web3.getDefaultAccount()
+account = _Web3.getAccounts()
 
+def getMessages(x):
+    if x == 1:
+        Messages = _Web3.getInbox(_defaultAccount)
+    else:
+        Messages = _Web3.getOutbox(_defaultAccount)
+    return Messages
 
 @app.route('/', methods = ['POST', 'GET'])
 def home():
     global _defaultAccount
-
+    Messages = getMessages(1)
     NewMail = 1
     inbox= 2
     outbox = 3
-    Messages = _Web3.getInbox(_defaultAccount)
-    account = _Web3.getAccounts()
     Page = 2
     msg = ''
 
@@ -28,12 +33,13 @@ def home():
         elif request.form['InboxButtons'] == 'inbox':
 
             Page = inbox
-            Messages = _Web3.getInbox(_defaultAccount)
+            Messages = getMessages(1)
+
 
         elif request.form['InboxButtons'] == 'outbox':
 
             Page = outbox
-            Messages = _Web3.getOutbox(_defaultAccount)
+            Messages = getMessages(2)
 
 
         elif request.form['InboxButtons'] == 'send':
@@ -48,9 +54,8 @@ def home():
             if request.form['InboxButtons'] == acc:
                 _defaultAccount = acc
                 if Page == 2:
-                    Messages = _Web3.getInbox(_defaultAccount)
+                    Messages = getMessages(1)
 
-                print('switch account' + account[acc][0], file=sys.stderr )
                 break
         return render_template('index.html', page=Page, msgs = Messages, mailMessage = msg, defaultAccount = _defaultAccount, accounts = account)
     return render_template('index.html', page=Page, msgs = Messages, accounts = account, mailMessage = msg, defaultAccount = _defaultAccount)
@@ -58,4 +63,4 @@ def home():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(port=8021)

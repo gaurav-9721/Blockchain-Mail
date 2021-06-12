@@ -66,9 +66,10 @@ contract DMail {
         mail.content = Content;
         mail.serialNumber = getTotalReceivedMails(recieverAddress);
 
-        Inbox storage inbox = users[recieverAddress];
-        inbox.receivedMails[getTotalReceivedMails(recieverAddress)] = mail;
-        inbox.sentMails[getTotalSentMails(senderAddress)] = mail;
+        Inbox storage inboxR = users[recieverAddress];
+        Inbox storage inboxS = users[senderAddress];
+        inboxR.receivedMails[getTotalReceivedMails(recieverAddress)] = mail;
+        inboxS.sentMails[getTotalSentMails(senderAddress)] = mail;
 
 
 
@@ -90,19 +91,19 @@ contract DMail {
 
     }
 
-    function getRecievedMail(address _address, int serialNumber) public view returns(string memory ,string memory, string memory){
+    function getRecievedMail(address _address, int serialNumber) public view returns(string memory ,string memory, string memory, address){
         string memory content =   users[_address].receivedMails[serialNumber].content;
         string memory Title = users[_address].receivedMails[serialNumber].title;
         string memory time = users[_address].receivedMails[serialNumber].time;
-
-        return (time, Title, content);
+        address _add = users[_address].receivedMails[serialNumber]._sender;
+        return (time, Title, content, _add);
     }
 
-    function getSentMail(address _address, int serialNumber) public view returns(string memory ,string memory, string memory){
+    function getSentMail(address _address, int serialNumber) public view returns(string memory ,string memory, string memory,address){
         string memory content =   users[_address].sentMails[serialNumber].content;
         string memory Title = users[_address].sentMails[serialNumber].title;
         string memory time = users[_address].sentMails[serialNumber].time;
-
-        return (time, Title, content);
+        address _add = users[_address].sentMails[serialNumber].reciever;
+        return (time, Title, content, _add);
     }
 }
