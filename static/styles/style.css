@@ -1,0 +1,303 @@
+.headerGrid {
+    display: grid;
+
+    grid-template-rows: 120px 500px ;
+    grid-gap: 30px;
+
+
+}
+
+.lowerGrid {
+    display: grid;
+    grid-template-columns:  150px auto;
+    grid-gap:  5px;
+
+     margin-top: 20px;
+    border: white;
+    border-style: solid ;
+}
+
+.header{
+    background-color: #ffffff;
+    font-size: 40px;
+    padding: 10px;
+    align-content: center;
+    color: Black;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 70% auto;
+    border: #d52e2e;
+
+}
+.ethereum{
+    border: black;
+    display: grid;
+    grid-template-columns: 100px auto;
+    margin: 10px;
+
+}
+.ethText{
+    display: grid;
+    grid-template-rows: auto 65%;
+    margin: 10px;
+}
+
+.Dmail{
+    font-family: Arial;
+    color: Black;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.runs{
+    font-family: Arial;
+    color: black;
+    font-size: 14px;
+}
+
+.eth_icon{
+    margin: 10px;
+    height: 100px;
+
+}
+
+.account{
+    float: right;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 15px;
+}
+
+.lower{
+    background-color: #b4d9e7;
+    font-size: 20px;
+
+
+    height: 100%;
+}
+
+.inbox{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background: white;
+
+    display: grid;
+
+    grid-template-rows: 50px 50px 50px;
+}
+.Messages{
+    width: 80%;
+    height: 100%;
+
+    background: white;
+    padding: 50px;
+    margin-right: 50px;
+}
+
+.newMail{
+    background-color: #f8efef;/* Green */
+    width: 80%;
+  border: none;
+  color: black;
+  padding: 10px;
+    margin: 15px;
+    border-radius: 100px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+     font-family: Arial;
+    font-weight: bold;
+
+}
+
+.newMail:hover{
+    background-color: #d52e2e;
+     transform: translateY(-1px);
+    box-shadow: 0px 8px 15px rgba(222, 43, 43, 0.5);
+    color: white;
+}
+
+.newMail:active{
+    transform: translateY(0.5px);
+}
+
+.inboxButton {
+    margin-top: 40px;
+     font-weight: bold;
+    letter-spacing: 2px;
+    background-color: transparent ;/* Green */
+    width: 100%;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+    font-family: Arial;
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+.inboxButton:hover{
+   background-color: #de2b2b;
+     color: white;
+
+}
+.inboxButton:focus{
+    background-color: #de2b2b;
+    border-color: #de2b2b;
+     color: white;
+}
+
+.hamburger{
+    float: end;
+}
+
+
+input[type=text] {
+  width: 92%;
+  padding: 12px 20px;
+  margin: 10px;
+    margin-top: 10px;
+  border: 0;
+  border-bottom: 2px solid #dcdada;
+    outline: none;
+
+}
+
+input[type=text]:focus{
+    border-bottom: 2px solid cornflowerblue;
+}
+
+textarea{
+    outline: none;
+    padding: 10px;
+    margin: 15px;
+    border: 0;
+    border-bottom: 2px solid #dcdada;
+    width: 92%;
+    margin-top: 40px;
+    resize: none;
+}
+textarea:focus{
+    border-bottom: 2px solid cornflowerblue;
+}
+
+.submitMail{
+    background-color: royalblue;
+    color: white;
+    border-radius: 7px;
+    padding: 8px;
+    margin: 10px;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    border: transparent;
+}
+.submitMail:focus{
+    background-color: darkblue;
+}
+
+
+.dropbtn {
+  background-color: transparent;
+  color: cornflowerblue;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: transparent;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 120px;
+
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+.switchaccbtn{
+    width: 100%;
+    font-size: 15px;
+    color: black;
+    background-color: white;
+    padding: 5px;
+    margin: 2px;
+    border: transparent;
+
+}
+.switchaccbtn:hover{
+    color: white;
+    background-color: red;
+}
+
+.displayAccountDetials {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 120px;
+
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.displayAccount{
+    display: block;
+}
+
+.accountLabel{
+    background-color: black;
+    color: white;
+    border: none;
+
+    margin: 10px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.hamburger {
+  width: 32px;
+  height: 5px;
+  background-color: black;
+  margin: 5px 0;
+}
+
+.hamburgerButton{
+    float: end;
+    margin-top: 10px;
+    margin-left: 15px;
+
+}

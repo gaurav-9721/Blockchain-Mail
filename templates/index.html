@@ -1,0 +1,169 @@
+<html>
+<head>
+    <title> D Mail</title>
+
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+
+    <script>
+
+    function switchAccount() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function displayAccountDetails(){
+        document.getElementById("accDetail").classList.toggle("displayAccount");
+    }
+
+    function displayMenu(){
+        //Code Later
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+    </script>
+</head>
+
+<body>
+
+    <div class="headerGrid">
+
+        <div class="header">
+
+            <div class="ethereum">
+                <img alt= "Etherium Image" src="../static/Images/Etherium_icon.png" class="eth_icon">
+
+                <div class="ethText">
+                    <label class="Dmail"> D Mail</label>
+                    <label class="runs"> Runs on Ethereum</label>
+                </div>
+            </div>
+
+            <div class="account" style="float: end">
+
+                <div class="accountDetails">
+
+                    <button class="accountLabel" onclick="displayAccountDetails()" style="font-size: 25px" id="accountLabel" >{{ accounts[defaultAccount][0]}}</button>
+                    <div class="displayAccountDetials" id="accDetail">
+                        <label> Balance: {{ accounts[defaultAccount][1] }} Ethers</label>
+                    </div>
+
+                </div>
+
+                <div class="dropdown">
+                  <button onclick="switchAccount()" class="dropbtn">swtich account</button>
+                  <div id="myDropdown" class="dropdown-content">
+                        <form action="/" method="post">
+                      {% for acc in accounts %}
+                      <button  class="switchaccbtn"  name="InboxButtons" value="{{ acc }}">{{ accounts[acc][0] }}</button>
+
+                      {% endfor %}
+
+                        </form>
+
+                  </div>
+
+                </div>
+            <div class="hamburgerButton" onclick="displayMenu()">
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+            </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="lowerGrid">
+            <div class="inbox ">
+                <form method ="POST" action="/">
+                <div > <button  class="newMail" name="InboxButtons" id = newMail type="submit" value="newMail"> New Mail </button></div>
+                <div> <button  name="InboxButtons" class="inboxButton" id = inbox type="submit" value="inbox"> Inbox </button></div>
+                <div> <button  type="submit" name="InboxButtons" class="inboxButton" value="outbox"> Outbox </button></div>
+                </form>
+            </div>
+
+
+            <div class = 'Messages'>
+                {% if page == 1 %}
+
+                    <div >
+                        <form method="POST" class="newMailArea" action="/">
+                            <label style="margin-bottom: 100px; font-family: Arial; font-size: 32px; font-weight: bold; letter-spacing: 1px;">Write mail</label>
+                            <br><br>
+                            <input  class="to" type="text" name="to" placeholder="Enter sender's address" id="reciever">
+
+                            <input class="title" type="text" name="title" id="title" placeholder="Subject">
+
+                            <textarea rows="7" class="Message" placeholder="Type your message here" id="content" name="content"></textarea>
+                            <button type="submit" class="submitMail" name="InboxButtons" value="send">Send Mail</button>
+
+                        <label style="color: #ff0f0f"> {{ mailMessage }}</label>
+                        </form>
+                    </div>
+                {% elif page == 2 %}
+                    <label class="Dmail">Inbox</label><br>
+                    <table>
+                        <tr>
+                            <th> Sender </th>
+                            <th> Title </th>
+                            <th> Message </th>
+                            <th> Time </th>
+                        </tr>
+
+                        {% for msg in msgs %}
+                        <tr>
+                            <td> {{ msg[3] }}</td>
+                            <td> {{ msg[0] }}</td>
+                            <td> {{ msg[1] }}</td>
+                            <td> {{ msg[2] }}</td>
+                        </tr>
+                {% endfor %}
+            </table>
+
+                {% else %}
+                    <label class="Dmail">Outbox</label><br>
+                    <table>
+                        <tr>
+                            <th> Sender </th>
+                            <th> Title </th>
+                            <th> Message </th>
+                            <th> Time </th>
+                        </tr>
+
+                        {% for msg in msgs %}
+                        <tr>
+                            <td> {{ msg[3] }}</td>
+                            <td> {{ msg[0] }}</td>
+                            <td> {{ msg[1] }}</td>
+                            <td> {{ msg[2] }}</td>
+                        </tr>
+                {% endfor %}
+            </table>
+                {% endif %}
+
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</body>
+
+
+</html>
