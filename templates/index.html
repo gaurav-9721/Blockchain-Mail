@@ -14,26 +14,56 @@
         document.getElementById("accDetail").classList.toggle("displayAccount");
     }
 
-    function displayMail(){
-        //Code Later
+    function displayMail(address, sender, title, content, timestamp){
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        document.getElementById('msgSender').innerText = sender ;
+        document.getElementById('msgAddress').innerText = address;
+        document.getElementById('msgContent').innerText = content;
+        document.getElementById('msgTitle').innerText = title;
+        document.getElementById('msgTime').innerText = timestamp;
+
+        modal.style.display = "block";
+
+
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
     }
 
     function displayMenu(){
         //Code Later
     }
 
+    function selectedBox(x){
+        var a ;
+        if (x == 1){
+            a = document.getElementById('inbox');
+
+        }
+        else{
+            a = document.getElementById('outbox');
+        }
+        a.style.color = 'white';
+        a.style.backgroundColor = 'black';
+    }
+
+
+
     // Close the dropdown if the user clicks outside of it
     window.onclick = function(event) {
       if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                  openDropdown.classList.remove('show');
+              }
           }
-        }
       }
+
     }
     </script>
 </head>
@@ -55,14 +85,7 @@
 
             <div class="account" style="float: end">
 
-                <div class="accountDetails">
 
-                    <button class="accountLabel" onclick="displayAccountDetails()" style="font-size: 25px" id="accountLabel" >{{ accounts[defaultAccount][0]}}</button>
-                    <div class="displayAccountDetials" id="accDetail">
-                        <label> Balance: {{ accounts[defaultAccount][1] }} Ethers</label>
-                    </div>
-
-                </div>
 
                 <div class="dropdown">
                   <button onclick="switchAccount()" class="dropbtn">swtich account</button>
@@ -78,11 +101,20 @@
                   </div>
 
                 </div>
-            <div class="hamburgerButton" onclick="displayMenu()">
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
-                <div class="hamburger"></div>
-            </div>
+            <div class="accountDetails">
+
+                    <button class="accountLabel" onclick="displayAccountDetails()" style="font-size: 25px" id="accountLabel" >{{ accounts[defaultAccount][0]}}</button>
+                    <div class="displayAccountDetials" id="accDetail">
+
+                        <label class="accountDetailHeading"> Account Address</label><br>
+                        <label class="accountDetailInfo">  {{ defaultAccount }} </label><br><br>
+                        <label class="accountDetailHeading"> Account Balance</label><br>
+                        <label class="accountBalance">  {{ accounts[defaultAccount][1] }} eth</label><br>
+
+
+                    </div>
+
+                </div>
 
 
             </div>
@@ -93,9 +125,9 @@
         <div class="lowerGrid">
             <div class="inbox ">
                 <form method ="POST" action="/">
-                <div > <button  class="newMail" name="InboxButtons" id = newMail type="submit" value="newMail"> New Mail </button></div>
-                <div> <button  name="InboxButtons" class="inboxButton" id = inbox type="submit" value="inbox"> Inbox </button></div>
-                <div> <button  type="submit" name="InboxButtons" class="inboxButton" value="outbox"> Outbox </button></div>
+
+                    <div> <button  name="InboxButtons" class="inboxButton" id = inbox type="submit" value="inbox"> Inbox </button></div>
+                <div> <button  type="submit" name="InboxButtons" class="inboxButton" value="outbox" id="outbox"> Outbox </button></div>
                 </form>
             </div>
 
@@ -119,21 +151,25 @@
                     </div>
                 {% elif page == 2 %}
                     <label class="boxText">Inbox</label><br>
-
+                    <script >
+                    selectedBox(1);
+                    </script>
                     <div class="messageTable">
                     <table>
                         <tr>
                             <th> Sender </th>
                             <th> Title </th>
                             <th> Message </th>
+                             <th> </th>
                             <th> Time </th>
                         </tr>
 
                         {% for msg in msgs %}
-                        <tr>
+                        <tr onclick="displayMail('{{ defaultAccount }}','{{ accounts[defaultAccount][0] }}', '{{ msg[1] }}','{{ msg[2] }}','{{ msg[0] }}')" >
                             <td> {{ accounts[defaultAccount][0] }}</td>
                             <td> {{ msg[1] }}</td>
                             <td> {{ msg[2] }}</td>
+                            <td></td>
                             <td> {{ msg[0] }}</td>
                         </tr>
                 {% endfor %}
@@ -141,9 +177,12 @@
 
                 {% else %}
                     <label class="boxText">Outbox</label><br>
+                    <script >
+                    selectedBox(2);
+                    </script>
                     <div class="messageTable">
                     <table>
-                        <tr onclick="">
+                        <tr >
                             <th> Sender </th>
                             <th> Title </th>
                             <th> Message </th>
@@ -152,7 +191,7 @@
                         </tr>
 
                         {% for msg in msgs %}
-                        <tr>
+                        <tr id="showMailOut" onclick="displayMail('{{ defaultAccount }}','{{ accounts[defaultAccount][0] }}', '{{ msg[1] }}','{{ msg[2] }}','{{ msg[0] }}')">
                             <td> {{ accounts[defaultAccount][0] }}</td>
                             <td > {{ msg[1] }}</td>
                             <td > {{ msg[2] }}</td>
@@ -163,9 +202,47 @@
             </table>
                     </div>
                 {% endif %}
+            <div id="myModal" class="modal">
 
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
 
+                  <table class="modalTable">
+                      <tr style="margin: 10px">
+                          <td>
+                                <label class="modalHeading"> From </label>
+                          </td>
+                          <td>:</td>
+                          <td>
+                               <label class="modalContent" id="msgSender"> </label>&#9;
+                          </td>
+                          <td></td>
+                          <td>
+                              <label id="msgAddress" style="color: dimgrey">  </label>
+                          </td>
+                      </tr>
 
+                      <tr style="margin: 10px">
+                          <td>
+                                <label class="modalHeading">Title</label>
+                          </td>
+                          <td>:</td>
+                          <td>
+                              <label class="modalContent" id="msgTitle">  </label>
+                          </td>
+                      </tr>
+                  </table>
+
+                 <br><br> <br>
+                  <p id="msgContent" class="modalContent"> </p>
+                <label class="time" id="msgTime"> </label>
+              </div>
+
+            </div>
+            <form action="/" method="post">
+        <div > <button  class="newMail" name="InboxButtons" id = newMail type="submit" value="newMail"> New Mail </button></div>
+            </form>
             </div>
 
         </div>

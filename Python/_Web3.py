@@ -10,7 +10,7 @@ else:
     print("Connected to "+ str(ganacheURL))
 
 contract = web3.eth.contract(address=contractAddress, abi=_abi)
-web3.eth.default_account = web3.eth.accounts[1]
+web3.eth.default_account = web3.eth.accounts[0]
 
 def getDefaultAccount():
     return web3.eth.default_account

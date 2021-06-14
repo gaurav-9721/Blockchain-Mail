@@ -1,5 +1,5 @@
 #smart_contract address
-contractAddress = '0x818Ff96B931b1609f7A7368599a6413B5D29f17F'
+contractAddress = '0x9F10d387e39EC4D5bfBe7F36269B59A02786926a'
 
 #Paste you network URL here, I am using ganache.
 ganacheURL = "HTTP://127.0.0.1:7545"
