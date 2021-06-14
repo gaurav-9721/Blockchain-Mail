@@ -370,9 +370,9 @@ textarea:focus{
   text-align: left;
     width: 100px;
   border-bottom: 1px solid #ddd;
-    /*text-overflow: ellipsis;*/
-    /*white-space: nowrap;*/
-    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     padding: 15px;
 }
 

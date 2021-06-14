@@ -166,7 +166,7 @@
 
                         {% for msg in msgs %}
                         <tr onclick="displayMail('{{ defaultAccount }}','{{ accounts[defaultAccount][0] }}', '{{ msg[1] }}','{{ msg[2] }}','{{ msg[0] }}')" >
-                            <td> {{ accounts[defaultAccount][0] }}</td>
+                            <td> {{ accounts[msg[3]][0] }}</td>
                             <td> {{ msg[1] }}</td>
                             <td> {{ msg[2] }}</td>
                             <td></td>
@@ -183,7 +183,7 @@
                     <div class="messageTable">
                     <table>
                         <tr >
-                            <th> Sender </th>
+                            <th> Receiver </th>
                             <th> Title </th>
                             <th> Message </th>
                             <th> </th>
@@ -192,7 +192,7 @@
 
                         {% for msg in msgs %}
                         <tr id="showMailOut" onclick="displayMail('{{ defaultAccount }}','{{ accounts[defaultAccount][0] }}', '{{ msg[1] }}','{{ msg[2] }}','{{ msg[0] }}')">
-                            <td> {{ accounts[defaultAccount][0] }}</td>
+                            <td> {{ accounts[msg[3]][0] }}</td>
                             <td > {{ msg[1] }}</td>
                             <td > {{ msg[2] }}</td>
                             <td></td>

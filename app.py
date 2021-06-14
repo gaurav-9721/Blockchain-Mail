@@ -12,6 +12,7 @@ def getMessages(x):
         Messages = _Web3.getInbox(_defaultAccount)
     else:
         Messages = _Web3.getOutbox(_defaultAccount)
+
     return Messages
 
 @app.route('/', methods = ['POST', 'GET'])
