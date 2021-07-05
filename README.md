@@ -25,7 +25,8 @@ A Decentralized mailing web application that runs on Ethereum blockchain. Users 
 
 <br/>
 
->>Happy Coding :)
+>>
+Happy Coding :)
 
 
 
